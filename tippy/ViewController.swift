@@ -64,6 +64,14 @@ class ViewController: UIViewController {
     }
   }
   
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    var defaults = NSUserDefaults.standardUserDefaults()
+    defaults.setObject(billField.text, forKey: "lastBillAmount")
+    defaults.synchronize()
+  }
+  
   func saveInputState(){
     var defaults = NSUserDefaults.standardUserDefaults()
     defaults.setObject(NSDate(), forKey: "lastSaved")

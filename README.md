@@ -11,5 +11,6 @@ iOS 8 tip calculator
   - optional: select and change theme
 - Walkthrough:
 
+![Gif Walkthrough](out.gif)
 
 

@@ -15,10 +15,38 @@ class ViewController: UIViewController {
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var tipControl: UISegmentedControl!
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveInputState", name: "applicationWillExitNotification", object: nil)
     // Do any additional setup after loading the view, typically from a nib.
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+
+    var defaults = NSUserDefaults.standardUserDefaults()
+    var defaultTipPercentageIndex = defaults.objectForKey("defaultTipPercentageIndex") as Int?
+
+    if (defaultTipPercentageIndex != nil){
+      tipControl.selectedSegmentIndex = defaultTipPercentageIndex!
+    }
+    
+    var lastSavedDate = defaults.objectForKey("lastSaved") as NSDate?
+    
+    if (lastSavedDate != nil){
+      var timeSinceLastSaved = NSDate().timeIntervalSinceDate(lastSavedDate!)
+      if (timeSinceLastSaved < 600){
+        billField.text = defaults.objectForKey("lastBillAmount") as String?
+      }
+    }
+  }
+  
+  func saveInputState(){
+    var defaults = NSUserDefaults.standardUserDefaults()
+    defaults.setObject(NSDate(), forKey: "lastSaved")
+    defaults.setObject(billField.text, forKey: "lastBillAmount")
+    defaults.synchronize()
   }
 
   override func didReceiveMemoryWarning() {
@@ -27,8 +55,7 @@ class ViewController: UIViewController {
   }
 
   @IBAction func onEditingChanged(sender: AnyObject) {
-    var tipPercentages = [0.18, 0.2, 0.22]
-    var selectedTipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
+    var selectedTipPercentage = Constants.TipPercentages[tipControl.selectedSegmentIndex]
     
     var billAmount = billField.text._bridgeToObjectiveC().doubleValue
     var tip = billAmount * selectedTipPercentage

@@ -14,6 +14,9 @@ class ViewController: UIViewController {
   @IBOutlet weak var billField: UITextField!
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var tipControl: UISegmentedControl!
+  @IBOutlet weak var billFieldDescription: UILabel!
+  @IBOutlet weak var tipFieldDescription: UILabel!
+  @IBOutlet weak var totalFieldDescription: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,6 +35,25 @@ class ViewController: UIViewController {
       tipControl.selectedSegmentIndex = defaultTipPercentageIndex!
     }
     
+    var defaultThemeIndex = defaults.objectForKey("defaultThemeIndex") as Int?
+    if (defaultThemeIndex == 1){
+      self.view.backgroundColor = UIColor.blackColor()
+      tipLabel.textColor = UIColor.whiteColor()
+      totalLabel.textColor = UIColor.whiteColor()
+      billFieldDescription.textColor = UIColor.whiteColor()
+      tipFieldDescription.textColor = UIColor.whiteColor()
+      totalFieldDescription.textColor = UIColor.whiteColor()
+      tipControl.tintColor = UIColor.whiteColor()
+    } else {
+      self.view.backgroundColor = UIColor.whiteColor()
+      tipLabel.textColor = UIColor.blackColor()
+      totalLabel.textColor = UIColor.blackColor()
+      billFieldDescription.textColor = UIColor.blackColor()
+      tipFieldDescription.textColor = UIColor.blackColor()
+      totalFieldDescription.textColor = UIColor.blackColor()
+      tipControl.tintColor = UIColor.blackColor()
+    }
+
     var lastSavedDate = defaults.objectForKey("lastSaved") as NSDate?
     
     if (lastSavedDate != nil){

@@ -90,8 +90,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="billField" destination="tmL-oX-Qo6" id="Jt3-fs-oTc"/>
+                        <outlet property="billFieldDescription" destination="jM5-bW-s4e" id="bjy-xh-QvE"/>
                         <outlet property="tipControl" destination="yES-bH-Flm" id="p5T-f3-VI5"/>
+                        <outlet property="tipFieldDescription" destination="PcL-f5-abL" id="Wwe-7D-WWW"/>
                         <outlet property="tipLabel" destination="qXD-Qd-o8f" id="Q0P-mF-W6s"/>
+                        <outlet property="totalFieldDescription" destination="rfU-2A-uKX" id="42e-hC-PvV"/>
                         <outlet property="totalLabel" destination="RUP-ou-AeW" id="7uU-v9-wZW"/>
                     </connections>
                 </viewController>
